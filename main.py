@@ -63,4 +63,4 @@ while run:
     board[coords[0][0]][coords[0][1]].redraw(0)
     
 pygame.quit()
-
+exit()
