@@ -22,13 +22,16 @@ class square:
         self.y = c * 50
         self.val = val
         self.screen = screen
-        if (self.val != 1):
+        if (self.val == 0):
             pygame.draw.rect(self.screen, (255, 255, 255),
                              pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
-        else:
+        elif self.val == 1:
             pygame.draw.rect(self.screen, (0, 0, 0),
                              pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
-
+        elif self.val == 2:
+            pygame.draw.rect(self.screen, (255, 125, 125),
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+        
     def __repr__(self):
         return str(self.val)
         #return "("+str(self.xd) +","+ str(self.yd)+")"
@@ -52,14 +55,22 @@ class square:
             self.yd = yd
             pygame.draw.rect(self.screen, (0, 0, 0),
                              pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
-            return [self.c,self.r]
+            return [self.c,self.r
+        
+        elif self.val == 2:
+            pygame.draw.rect(self.screen, (255, 125, 125),
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+        
         
 
 board = [[square(j, i, 0, window) for i in range(10)] for j in range(10)]
 s = 4
 #Different bord set up becuase of redraw
-for i in range(2, 5, 1):
+for i in range(1, 3, 1):
     board[s][i]=square(s, i, 1, window,1)
+#adds Apples
+
+board[s][8] = square(s,8,2,window,0)
 
 square.endS = [s, 2]
 square.startS = [s, 4]
@@ -133,7 +144,7 @@ while run:
     #moves the snake using xd,yd to determine new position
     square.endS = board[square.endS[0]][square.endS[1]].redraw(0)
     square.startS = board[square.startS[0]+yd][square.startS[1] + xd].redraw(1,xd,yd)
-
+    
     
 
 pygame.quit()
