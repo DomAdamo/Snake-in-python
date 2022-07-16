@@ -131,6 +131,12 @@ while run:
     pygame.display.flip()
 
 
+    #four one line if statements for the wrap arround affect
+    SQ.sS[0] = -1 if SQ.sS[0]+yd == 10 else SQ.sS[0]
+    SQ.sS[1] = -1 if SQ.sS[1]+xd == 10 else SQ.sS[1]
+    SQ.eS[0] = 0 if SQ.eS[0] == 10 else SQ.eS[0]
+    SQ.eS[1] = 0 if SQ.eS[1] == 10 else SQ.eS[1]
+    
 
 
     #moves the snake using xd,yd to determine new position
