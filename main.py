@@ -28,7 +28,8 @@ class square:
                              pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
 
     def __repr__(self):
-        return "("+str(self.xd) +","+ str(self.yd)+")"
+        return str(self.val)
+        #return "("+str(self.xd) +","+ str(self.yd)+")"
 #Added redraw function
     def redraw(self, v,xd=0,yd=0):
 
@@ -60,7 +61,7 @@ for i in range(2, 5, 1):
 
 coords = [[s, 2], [s, 4]]
 
-p(board)
+
 
 run = True
 
@@ -121,9 +122,9 @@ while run:
     time.sleep(.3)
 
     #troubleshooting
-    print (str(xd) +","+str(yd))
-    print(coords)
-    p(board)
+#     # print (str(xd) +","+str(yd))
+#     # print(coords)
+#     # p(board)
 
 
     #moves the snake using xd,yd to determine new position
