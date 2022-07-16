@@ -9,9 +9,9 @@ def p(g):
     print(" " + str(g)[1:][:-1].replace("],", "]\n"))
 
 
-class square:
-    startS = []
-    endS = []
+class SQ:
+    sS = []
+    eS = []
 
     def __init__(self,c,r,val,screen,xd=0,yd=0):
         self.r = r
@@ -39,7 +39,7 @@ class square:
     def redraw(self, v,xd=0,yd=0):
 
         self.val = v
-        if (self.val == 0):
+        if (self.val == 0 and not xd == 2):
             # uses different variables to return, and set 0 so that direction is not stored
             xD = self.xd 
             self.xd = 0
@@ -62,16 +62,16 @@ class square:
                              pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
         
 
-board = [[square(j, i, 0, window) for i in range(10)] for j in range(10)]
+board = [[SQ(j, i, 0, window) for i in range(10)] for j in range(10)]
 s = 4
 #Different bord set up becuase of redraw
 for i in range(2, 5, 1):
-    board[s][i]=square(s, i, 1, window,1)
-board[s][8] = square(s,8,2,window,0)
+    board[s][i]=SQ(s, i, 1, window,1)
+board[s][8] = SQ(s,8,2,window,0)
 
 
-square.endS = [s, 2]
-square.startS = [s, 4]
+SQ.eS = [s, 2]
+SQ.sS = [s, 4]
 
 
 
@@ -116,7 +116,7 @@ while run:
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0)]
 
             #Vs
-            board[square.startS[0]][square.startS[1]].redraw(1,xd,yd)
+            board[SQ.sS[0]][SQ.sS[1]].redraw(1,xd,yd)
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (1,0), (0,1), (0,0), (0,0)]
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,1), (0,0), (0,0)]
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0)]
@@ -130,19 +130,18 @@ while run:
 
     pygame.display.flip()
 
-    #added animation
-    time.sleep(.3)
 
-    #troubleshooting
-#     # print (str(xd) +","+str(yd))
-#     # print(coords)
-#     # p(board)
 
 
     #moves the snake using xd,yd to determine new position
-    square.endS = board[square.endS[0]][square.endS[1]].redraw(0)
-    square.startS = board[square.startS[0]+yd][square.startS[1] + xd].redraw(1,xd,yd)
 
+    if board[SQ.sS[0]+yd][SQ.sS[1] + xd].val != 2:
+        SQ.eS = board[SQ.eS[0]][SQ.eS[1]].redraw(0)
+    
+
+    SQ.sS = board[SQ.sS[0]+yd][SQ.sS[1] + xd].redraw(1,xd,yd)
+    
+    time.sleep(.2)
     
 
 pygame.quit()
