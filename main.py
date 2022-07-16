@@ -1,5 +1,8 @@
 import pygame
 import time
+import random
+#uses random for the apples
+
 pygame.init()
 window = pygame.display.set_mode((500, 500))
 window.fill((125, 125, 125))
@@ -143,6 +146,14 @@ while run:
 
     if board[SQ.sS[0]+yd][SQ.sS[1] + xd].val != 2:
         SQ.eS = board[SQ.eS[0]][SQ.eS[1]].redraw(0)
+    #adds more apples
+    else:
+        rC = 0
+        rR = 0
+        while not board[rC][rR].val == 0:
+            rC = random.randint(1,9)
+            rR = random.randint(1,9)
+        board[rC][rR].redraw(2)
     
 
     SQ.sS = board[SQ.sS[0]+yd][SQ.sS[1] + xd].redraw(1,xd,yd)
