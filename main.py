@@ -63,7 +63,7 @@ coords = [[s, 2], [s, 4]]
 p(board)
 
 run = True
-s = 0
+
 xd = 1
 yd = 0
 while run:
@@ -72,11 +72,22 @@ while run:
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.KEYDOWN:
-            s=1
-            keys = pygame.key.get_pressed()
-            #used to set the direction of the snake
-            xd = keys[pygame.K_RIGHT] - keys[pygame.K_LEFT]
-            yd = keys[pygame.K_DOWN] - keys[pygame.K_UP]
+
+            #Fixes Shrinking bug
+            if event.key == pygame.K_RIGHT and not  xd == -1:
+                xd = 1
+                yd = 0
+            elif event.key == pygame.K_LEFT and not  xd == 1 :
+                xd = -1
+                yd = 0
+            elif event.key == pygame.K_DOWN and not yd == -1:
+                xd = 0
+                yd = 1
+
+            elif event.key == pygame.K_UP and not yd == 1:
+                xd = 0
+                yd = -1
+            
 
             #Used only to redraw the current block and change its direction for turns
             ## EX ( xd,yd) or each block:
