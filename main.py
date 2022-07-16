@@ -144,8 +144,12 @@ while run:
 
     #moves the snake using xd,yd to determine new position
 
-    if board[SQ.sS[0]+yd][SQ.sS[1] + xd].val != 2:
+    if board[SQ.sS[0]+yd][SQ.sS[1] + xd].val == 0:
         SQ.eS = board[SQ.eS[0]][SQ.eS[1]].redraw(0)
+
+    #Adds Death
+    elif board[SQ.sS[0]+yd][SQ.sS[1] + xd].val == 1:
+        run = False
     #adds more apples
     else:
         rC = 0
