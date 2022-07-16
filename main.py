@@ -10,6 +10,8 @@ def p(g):
 
 
 class square:
+    startS = []
+    endS = []
     def __init__(self,c,r,val,screen,xd=0,yd=0):
         self.r = r
         self.c = c
@@ -59,7 +61,8 @@ s = 4
 for i in range(2, 5, 1):
     board[s][i]=square(s, i, 1, window,1)
 
-coords = [[s, 2], [s, 4]]
+square.endS = [s, 2]
+square.startS = [s, 4]
 
 
 
@@ -104,7 +107,7 @@ while run:
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0)]
 
             #Vs
-            board[coords[1][0]][coords[1][1]].redraw(1,xd,yd)
+            board[square.startS[0]][square.startS[1]].redraw(1,xd,yd)
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (1,0), (0,1), (0,0), (0,0)]
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,1), (0,0), (0,0)]
              # [(0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0), (0,0)]
@@ -128,8 +131,8 @@ while run:
 
 
     #moves the snake using xd,yd to determine new position
-    coords[0] = board[coords[0][0]][coords[0][1]].redraw(0)
-    coords[1] = board[coords[1][0]+yd][coords[1][1] + xd].redraw(1,xd,yd)
+    square.endS = board[square.endS[0]][square.endS[1]].redraw(0)
+    square.startS = board[square.startS[0]+yd][square.startS[1] + xd].redraw(1,xd,yd)
 
     
 
