@@ -26,15 +26,24 @@ class SQ:
         self.y = c * 50
         self.val = val
         self.screen = screen
+        self.size = 50
         if self.val == 0:
-            pygame.draw.rect(self.screen, (255, 255, 255),
-                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+            self.drawZ()
         elif self.val == 1:
             pygame.draw.rect(self.screen, (0, 0, 0),
-                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, self.size, self.size))
         elif self. val == 2:
             pygame.draw.rect(self.screen, (255, 125, 125),
-                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, self.size, self.size))
+    def drawZ(self):
+        if (self.c+self.r)%2 == 0:
+            pygame.draw.rect(self.screen, (125, 255, 125),
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, self.size, self.size))
+        else:
+            pygame.draw.rect(self.screen, (75, 255, 75),
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, self.size, self.size))
+            
+   
     def __repr__(self):
         return str(self.val)
         #return "("+str(self.xd) +","+ str(self.yd)+")"
@@ -48,8 +57,7 @@ class SQ:
             self.xd = 0
             yD = self.yd
             self.yd = 0
-            pygame.draw.rect(self.screen, (255, 255, 255),
-                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+            self.drawZ()
             return [self.c + yD,self.r+xD]
 
         elif self.val== 1:
@@ -57,12 +65,12 @@ class SQ:
             self.xd = xd
             self.yd = yd
             pygame.draw.rect(self.screen, (0, 0, 0),
-                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, self.size, self.size))
             return [self.c,self.r]
         
         elif self. val == 2:
             pygame.draw.rect(self.screen, (255, 125, 125),
-                             pygame.Rect(2.5 + self.x, 2.5 + self.y, 45, 45))
+                             pygame.Rect(2.5 + self.x, 2.5 + self.y, self.size, self.size))
         
 
 board = [[SQ(j, i, 0, window) for i in range(10)] for j in range(10)]
@@ -148,8 +156,8 @@ while run:
         SQ.eS = board[SQ.eS[0]][SQ.eS[1]].redraw(0)
     #adds more apples
     else:
-        rC = 0
-        rR = 0
+        rC = random.randint(1,9)
+        rR = random.randint(1,9)
         while not board[rC][rR].val == 0:
             rC = random.randint(1,9)
             rR = random.randint(1,9)
