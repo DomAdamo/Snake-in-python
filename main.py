@@ -152,8 +152,8 @@ while run:
         run = False
     #adds more apples
     else:
-        rC = 0
-        rR = 0
+        rC = random.randint(1,9)
+        rR = random.randint(1,9)
         while not board[rC][rR].val == 0:
             rC = random.randint(1,9)
             rR = random.randint(1,9)
